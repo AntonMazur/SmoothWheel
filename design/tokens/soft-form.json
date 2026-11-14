@@ -1,0 +1,82 @@
+{
+  "name": "SmoothWheel Soft Form",
+  "version": "1.0.0",
+  "primitive": {
+    "ink": "#20221F",
+    "coral": "#FF7868",
+    "mint": "#DFEEE6",
+    "chalk": "#F7F5F0",
+    "pearl": "#FFFFFF",
+    "blush": "#F4E4DF"
+  },
+  "color": {
+    "light": {
+      "paper": "#F7F5F0",
+      "surface": "#FCFAF7",
+      "surfaceRaised": "#FFFFFF",
+      "text": "#20221F",
+      "textMuted": "#656962",
+      "line": "#E6E1DB",
+      "track": "#DEDAD5",
+      "accent": "#FF7868",
+      "accentText": "#B24435",
+      "accentDisplay": "#DF5747",
+      "accentWash": "#F9E5E0",
+      "mint": "#DFEEE6",
+      "primary": "#20221F",
+      "onPrimary": "#FFFFFF",
+      "focus": "#995044",
+      "primaryHover": "#41453D"
+    },
+    "dark": {
+      "paper": "#20221F",
+      "surface": "#2A2C28",
+      "surfaceRaised": "#343630",
+      "text": "#F7F5F0",
+      "textMuted": "#B9BDB4",
+      "line": "#464A40",
+      "track": "#53574D",
+      "accent": "#FF9384",
+      "accentText": "#FFAA9D",
+      "accentDisplay": "#FF9384",
+      "accentWash": "#51382F",
+      "mint": "#35443B",
+      "primary": "#F7F5F0",
+      "onPrimary": "#20221F",
+      "focus": "#FFAA9D",
+      "primaryHover": "#D8DCD3"
+    }
+  },
+  "space": {
+    "xs": 4,
+    "sm": 8,
+    "md": 16,
+    "lg": 24,
+    "xl": 32,
+    "xxl": 48,
+    "section": 88
+  },
+  "radius": {
+    "small": 8,
+    "control": 12,
+    "panel": 22,
+    "pill": 999
+  },
+  "font": {
+    "caption": 12,
+    "body": 15,
+    "control": 16,
+    "title": 40,
+    "display": 84
+  },
+  "motion": {
+    "fast": 120,
+    "normal": 180
+  },
+  "control": {
+    "height": 44,
+    "switchWidth": 54,
+    "switchHeight": 30,
+    "sliderHeight": 28
+  }
+}

@@ -1,0 +1,19 @@
+name: Build and test
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test native app and design tokens
+        run: ./scripts/test.sh
+      - name: Build app bundle
+        run: ./build.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SmoothWheel-local-build
+          path: releases/SmoothWheel.zip
