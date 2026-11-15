@@ -6,7 +6,7 @@ A native macOS menu-bar utility for comfortable scrolling with standard third-pa
 
 ## Status
 
-Version **0.3.11** is an Apple Silicon prototype, ad-hoc signed and not notarized. Physical Razer testing and native event/frame-clock regressions have been performed; broad application compatibility and the oldest supported macOS still need validation. Slight landing movement remains reported in Gmail. The reverted Chrome-specific trial is documented in the changelog.
+Version **0.3.11** is an Apple Silicon build, ad-hoc signed and not notarized. Physical Razer testing and native event/frame-clock regressions have been performed; broad application compatibility and the oldest supported macOS still need validation. Slight landing movement remains reported in Gmail. The reverted Chrome-specific trial is documented in the changelog.
 
 Source: [AntonMazur/SmoothWheel](https://github.com/AntonMazur/SmoothWheel).
 

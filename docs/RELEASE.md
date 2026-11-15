@@ -1,6 +1,6 @@
 # Release preparation
 
-The public source repository is https://github.com/AntonMazur/SmoothWheel. Version 0.3.11 remains a local Apple Silicon prototype with an ad-hoc signature; publishing source does not make the app notarized.
+The public source repository is https://github.com/AntonMazur/SmoothWheel. Version 0.3.11 is an Apple Silicon build with an ad-hoc signature; publishing source does not make the app notarized.
 
 Run `./scripts/test.sh`, `./build.sh`, and `./scripts/package-source.sh`. Validate the supported hardware, target apps, exclusions, shortcuts, sleep/wake, and permission changes. Verify the oldest supported macOS and build/test Intel separately before claiming support.
 

@@ -104,7 +104,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     @objc func showAbout() {
         let alert = NSAlert()
         alert.messageText = "SmoothWheel 0.3.11"
-        alert.informativeText = "A familiar mouse. A smoother Mac.\n\nNative Swift and AppKit. MIT licensed. No accounts or analytics. This is a locally signed prototype; physical hardware and app compatibility testing is ongoing."
+        alert.informativeText = "A familiar mouse. A smoother Mac.\n\nNative Swift and AppKit. MIT licensed. No accounts or analytics. Locally signed and not notarized. Physical hardware and app compatibility testing is ongoing."
         alert.addButton(withTitle: "Done")
         if let window = settings?.window { alert.beginSheetModal(for: window) }
     }

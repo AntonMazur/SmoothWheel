@@ -91,5 +91,5 @@
 
 ## 0.1.0 — 2026-11-14
 
-- Initial native menu-bar prototype, mouse-wheel smoothing, direction control, per-app exclusions, and Option bypass.
+- Initial native menu-bar utility, mouse-wheel smoothing, direction control, per-app exclusions, and Option bypass.
 - Core tests for distance preservation, reversal, reset, and bounded input.
