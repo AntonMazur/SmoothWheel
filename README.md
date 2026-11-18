@@ -75,6 +75,12 @@ Smoothing starts disabled each launch. Hold **Option** while scrolling to tempor
 
 The 1× baseline travels three times the native wheel distance. Exclusions use the foreground app, including when hovering over background windows. Continuous events from other utilities pass through unchanged.
 
+## Help test your mouse
+
+Using a Logitech, Razer, Microsoft, or another standard mouse? A five-minute test can help other Mac users choose with more confidence. Reports of smooth scrolling are just as useful as bug reports.
+
+**[Share your mouse and app results](https://github.com/AntonMazur/SmoothWheel/issues/new?template=compatibility_report.yml)** · [Compatibility table and test guide](docs/COMPATIBILITY.md)
+
 ## Compatibility and known limitations
 
 Version **0.3.11** is an Apple Silicon build, ad-hoc signed and not notarized. Physical Razer testing and native event/frame-clock regressions have been performed; broad application compatibility and the oldest supported macOS still need validation. Slight landing movement remains reported in Gmail. The reverted Chrome-specific trial is documented in the [changelog](CHANGELOG.md).

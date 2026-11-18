@@ -1,0 +1,77 @@
+name: Mouse compatibility report
+description: Share a successful test or a compatibility problem with your mouse and apps.
+title: "[Compatibility] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for trying SmoothWheel! Successful tests are useful too. Follow the [five-minute check](https://github.com/AntonMazur/SmoothWheel/blob/main/docs/COMPATIBILITY.md#five-minute-check) and report what you actually tested. A written report is enough; no private content or device serial numbers are needed.
+  - type: input
+    id: version
+    attributes:
+      label: SmoothWheel version
+      placeholder: e.g. 0.3.11 release download, or source build and commit
+    validations:
+      required: true
+  - type: input
+    id: mouse
+    attributes:
+      label: Mouse brand, exact model, and connection
+      placeholder: e.g. Logitech M185, USB receiver
+    validations:
+      required: true
+  - type: input
+    id: system
+    attributes:
+      label: macOS version and Mac chip
+      placeholder: e.g. macOS version number; Apple M-series or Intel
+    validations:
+      required: true
+  - type: input
+    id: apps
+    attributes:
+      label: Apps tested and their versions
+      description: Include the browser version for web apps such as Gmail.
+    validations:
+      required: true
+  - type: input
+    id: settings
+    attributes:
+      label: Smoothing settings
+      description: Confirm smoothing was enabled; include preset, speed, smoothing, and reverse direction.
+    validations:
+      required: true
+  - type: textarea
+    id: utilities
+    attributes:
+      label: Other mouse utilities or drivers
+      description: List any running mouse or scrolling utilities, or write None / Unknown.
+    validations:
+      required: true
+  - type: dropdown
+    id: result
+    attributes:
+      label: Overall result
+      options:
+        - Works well in the checks I performed
+        - Partly works / app-specific problem
+        - Does not work
+        - Could not complete setup
+    validations:
+      required: true
+  - type: textarea
+    id: checks
+    attributes:
+      label: Results and reproduction steps
+      description: For each check, say Works / Problem / Not tested. Describe problems and whether Option bypass changes them.
+      value: |
+        - Short wheel steps, longer scrolling, stopping, and reversal:
+        - Horizontal wheel (if available):
+        - Option bypass:
+        - Foreground app exclusion:
+        - Trackpad (if available):
+        - After sleep/wake (optional):
+
+        Details / reproduction steps:
+    validations:
+      required: true

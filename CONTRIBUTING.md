@@ -15,6 +15,7 @@ The app archive is written to `releases/SmoothWheel.zip`. This is an ad-hoc-sign
 
 ## Useful contributions
 
+- Try the [five-minute compatibility check](docs/COMPATIBILITY.md) and [share your results](https://github.com/AntonMazur/SmoothWheel/issues/new?template=compatibility_report.yml), including successful tests.
 - Hardware reports: mouse brand/model, connection type, macOS version, other mouse software, and target app.
 - App-specific problems: exact reproduction steps and whether holding Option fixes the issue.
 - Scrolling-engine fixes: preserve trackpad events, input distance, immediate direction reversal, and fail-open behavior.
