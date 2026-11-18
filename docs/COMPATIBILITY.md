@@ -28,6 +28,6 @@ There are no complete community reports for the current release in this table ye
 4. Hold **Option** while scrolling to compare bypass behavior. Add one test app to **App exclusions**, bring it to the foreground, and check that its original scrolling returns. If you use a trackpad, check that its continuous scrolling feels unchanged.
 5. [Submit your results](https://github.com/AntonMazur/SmoothWheel/issues/new?template=compatibility_report.yml), including successful checks and anything you could not test. Optional: repeat a short check after sleep/wake.
 
-Exclusions follow the foreground app, even when the pointer is over a background window. The current download is ad-hoc signed and not notarized; see the [setup guide](../README.md#get-started) before testing.
+In version 0.3.17, exclusions follow the event’s receiving process, including ordinary windowed apps and system overlays. Test immediate transitions from an excluded app to a windowed app without waiting for a pause. The download is ad-hoc signed and not notarized; see the [setup guide](../README.md#get-started) before testing.
 
 A written report is enough. If a recording helps explain a problem, use the Playground or another non-sensitive test page. No private documents, mailbox content, device serial numbers, or diagnostic dumps are needed.

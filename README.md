@@ -83,7 +83,9 @@ Smoothing starts disabled each launch. Hold **Option** while scrolling to tempor
 
 ### How it behaves
 
-The 1× baseline travels three times the native wheel distance. Exclusions use the foreground app, including when hovering over background windows. Continuous events from other utilities pass through unchanged.
+The 1× baseline travels three times the native wheel distance. Exclusions follow the event’s receiving process, including inactive windows and system popovers. Known destinations use a cached identity lookup; asynchronous Accessibility hit-testing is a fallback for events without recipient metadata. An unresolved wheel burst passes through natively until its next burst. Background document renderers are tracked too, so Notes attachments receive smoothing and direction settings. Continuous events from other utilities pass through unchanged.
+
+The [0.3.17 release notes](CHANGELOG.md#0317--2026-11-19) explain the scrolling fixes and include measured callback timing, frame intervals and test coverage, with their limits.
 
 ## Help test your mouse
 
@@ -93,7 +95,7 @@ Using a Logitech, Razer, Microsoft, or another standard mouse? A five-minute tes
 
 ## Compatibility and known limitations
 
-Version **0.3.11** is an Apple Silicon build, ad-hoc signed and not notarized. Physical Razer testing and native event/frame-clock regressions have been performed; broad application compatibility and the oldest supported macOS still need validation. Slight landing movement remains reported in Gmail. The reverted Chrome-specific trial is documented in the [changelog](CHANGELOG.md).
+Version **0.3.17** is an Apple Silicon build, ad-hoc signed and not notarized. Physical Razer testing and native event/frame-clock regressions have been performed; broad application compatibility and the oldest supported macOS still need validation. Slight landing movement remains reported in Gmail. The reverted Chrome-specific trial is documented in the [changelog](CHANGELOG.md).
 
 ## Build and test
 
@@ -105,6 +107,8 @@ Requires macOS with Xcode 16+ and Swift Testing. The package targets macOS 13; t
 ./scripts/package-source.sh
 ```
 
+See [testing and measurement](docs/TESTING.md) for coverage gates, snapshot review, and the optimized engine benchmark.
+
 The built app ZIP is `releases/SmoothWheel.zip`. Follow [Get started](#get-started) to install it. Rebuilding changes the ad-hoc signature and may require refreshing its existing Accessibility approval.
 
 ## Structure
@@ -112,8 +116,9 @@ The built app ZIP is `releases/SmoothWheel.zip`. Follow [Get started](#get-start
 - `Sources/ScrollCore`: motion mathematics and shared presets.
 - `Sources/ScrollEvents`: testable Quartz event conversion.
 - `Sources/ScrollTiming`: target-display frame clock.
-- `Sources/SmoothWheel`: native app, controls, and engine lifecycle.
-- `Tests`: motion, event-packet, native scrolling, and clock regressions.
+- `Sources/SmoothWheelAppCore`: native controls, settings, diagnostics, and testable engine coordinator.
+- `Sources/SmoothWheel`: executable entry point.
+- `Tests`: production-engine replays, UI snapshots, motion, native scrolling, resolver, and clock regressions.
 - `design/tokens/soft-form.json`: native design-token source.
 - `scripts`: build support, validation, and reproducible benchmarks.
 - `docs`: release steps and performance investigations.

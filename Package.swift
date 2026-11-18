@@ -7,9 +7,11 @@ let package = Package(
         .target(name: "ScrollCore"),
         .target(name: "ScrollTiming"),
         .target(name: "ScrollEvents", dependencies: ["ScrollCore"]),
-        .executableTarget(name: "SmoothWheel", dependencies: ["ScrollCore", "ScrollEvents", "ScrollTiming"]),
+        .target(name: "SmoothWheelAppCore", dependencies: ["ScrollCore", "ScrollEvents", "ScrollTiming"]),
+        .executableTarget(name: "SmoothWheel", dependencies: ["SmoothWheelAppCore"]),
+        .testTarget(name: "SmoothWheelAppCoreTests", dependencies: ["SmoothWheelAppCore", "ScrollEvents", "ScrollCore"], exclude: ["Snapshots", "Fixtures"]),
         .testTarget(name: "ScrollTimingTests", dependencies: ["ScrollTiming"]),
         .testTarget(name: "ScrollCoreTests", dependencies: ["ScrollCore"]),
-        .testTarget(name: "ScrollEventsTests", dependencies: ["ScrollEvents"])
+        .testTarget(name: "ScrollEventsTests", dependencies: ["ScrollEvents", "ScrollTiming"])
     ]
 )

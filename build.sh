@@ -20,8 +20,8 @@ cat > "$APP/Contents/Info.plist" <<'PLIST'
 <key>CFBundleName</key><string>SmoothWheel</string>
 <key>CFBundleDisplayName</key><string>SmoothWheel</string>
 <key>CFBundleIdentifier</key><string>local.smoothwheel.app</string>
-<key>CFBundleVersion</key><string>14</string>
-<key>CFBundleShortVersionString</key><string>0.3.11</string>
+<key>CFBundleVersion</key><string>20</string>
+<key>CFBundleShortVersionString</key><string>0.3.17</string>
 <key>CFBundleExecutable</key><string>SmoothWheel</string>
 <key>CFBundleIconFile</key><string>SmoothWheelIcon.icns</string>
 <key>CFBundlePackageType</key><string>APPL</string>

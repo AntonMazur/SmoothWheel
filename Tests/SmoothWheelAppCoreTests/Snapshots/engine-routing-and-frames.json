@@ -1,0 +1,574 @@
+{
+  "decisions" : [
+    "native",
+    "smooth",
+    "native",
+    "native",
+    "smooth",
+    "native"
+  ],
+  "frames" : [
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -3
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -4
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -5
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -4
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -5
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -5
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -5
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -5
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -4
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -5
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -3
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -4
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -4
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -3
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -3
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -3
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -2
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -2
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -2
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -2
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -2
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -1
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -2
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -1
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -1
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -1
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -1
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -1
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -1
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -1
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -1
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -1
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -1
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -1
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -1
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -3
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -4
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -5
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -4
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -5
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -5
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -5
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -5
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -4
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -5
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -3
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -4
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -4
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -3
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -3
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -3
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -2
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -2
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -2
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -2
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -2
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -1
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -2
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -1
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -1
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -1
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -1
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -1
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -1
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -1
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -1
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -1
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -1
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -1
+    },
+    {
+      "marked" : true,
+      "momentum" : 0,
+      "phase" : 0,
+      "precise" : 1,
+      "x" : 0,
+      "y" : -1
+    }
+  ],
+  "stopped" : true,
+  "totalY" : -180
+}

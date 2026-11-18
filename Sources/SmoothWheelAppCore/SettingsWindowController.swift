@@ -21,7 +21,12 @@ final class SettingsWindowController: NSWindowController {
     private var exclusionList = NSStackView()
     private let aura = NSImageView()
 
-    init(coordinator: AppDelegate) {
+    private let permissionGranted: () -> Bool
+    private let resourceURL: (String) -> URL?
+    init(coordinator: AppDelegate, permissionGranted: @escaping () -> Bool = { AXIsProcessTrusted() },
+         resourceURL: @escaping (String) -> URL? = { Bundle.main.url(forResource: $0, withExtension: "png") }) {
+        self.permissionGranted = permissionGranted
+        self.resourceURL = resourceURL
         self.coordinator = coordinator
         let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 560, height: 660),
             styleMask: [.titled, .closable, .miniaturizable], backing: .buffered, defer: false)
@@ -71,7 +76,7 @@ final class SettingsWindowController: NSWindowController {
         guard let root = window?.contentView else { return }
         let paper = DesignSurface(); paper.fill = DesignTokens.paper; paper.radius = 0; paper.outlined = false
         pin(paper, to: root)
-        if let url = Bundle.main.url(forResource: "heading-aura", withExtension: "png") { aura.image = NSImage(contentsOf: url) }
+        if let url = resourceURL("heading-aura") { aura.image = NSImage(contentsOf: url) }
         aura.setContentCompressionResistancePriority(.init(1), for: .horizontal)
         aura.setContentCompressionResistancePriority(.init(1), for: .vertical)
         aura.setContentHuggingPriority(.init(1), for: .horizontal)
@@ -80,7 +85,7 @@ final class SettingsWindowController: NSWindowController {
         NSLayoutConstraint.activate([aura.leadingAnchor.constraint(equalTo: root.leadingAnchor), aura.trailingAnchor.constraint(equalTo: root.trailingAnchor),
             aura.topAnchor.constraint(equalTo: root.topAnchor, constant: 112), aura.heightAnchor.constraint(equalToConstant: 122)])
         let mark = NSImageView()
-        if let url = Bundle.main.url(forResource: "brand-mark", withExtension: "png") { mark.image = NSImage(contentsOf: url) }
+        if let url = resourceURL("brand-mark") { mark.image = NSImage(contentsOf: url) }
         mark.imageScaling = .scaleProportionallyUpOrDown
         mark.widthAnchor.constraint(equalToConstant: 44).isActive = true; mark.heightAnchor.constraint(equalToConstant: 28).isActive = true
         let brand = stack([mark, text("SmoothWheel", size: 25, weight: .bold)], spacing: 8, horizontal: true)
@@ -184,7 +189,7 @@ final class SettingsWindowController: NSWindowController {
             card(scroll), text("Option = original scrolling. Reverse direction to cancel the old movement.", size: 12, secondary: true)])
     }
     @objc private func navigate() { select(navigation.selectedIndex) }
-    private func select(_ index: Int) {
+    func select(_ index: Int) {
         guard pages.indices.contains(index) else { return }
         navigation.selectedIndex = index
         if let window {
@@ -198,7 +203,7 @@ final class SettingsWindowController: NSWindowController {
         if index == 1 { reloadExclusions() }
     }
     func refresh() {
-        let trusted = AXIsProcessTrusted()
+        let trusted = permissionGranted()
         activeSwitch.state = coordinator.engine.enabled ? .on : .off
         reverse.state = coordinator.engine.reversed ? .on : .off
         permissionTitle.stringValue = trusted ? "Accessibility is ready" : "Accessibility setup"

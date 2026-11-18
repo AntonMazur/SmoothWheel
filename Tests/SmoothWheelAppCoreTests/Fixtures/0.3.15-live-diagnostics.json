@@ -1,0 +1,14 @@
+{
+  "acceptedDiscreteEvents": 100,
+  "bypassedContinuousEvents": 0,
+  "clockMode": "displayLink",
+  "frameIntervalMaximumMs": 16.629624646157026,
+  "frameIntervalP95Ms": 8.606749586760998,
+  "frameIntervalsRecorded": 1277,
+  "inputCallbackMaximumMs": 0.5356250330805779,
+  "inputCallbackP95Ms": 0.1910002902150154,
+  "maximumPointerMismatchPixels": 0,
+  "postedFrames": 1152,
+  "routedWheelEvents": 130,
+  "scope": "Sanitized aggregate historical reference, not a replay input or controlled comparison."
+}

@@ -1,0 +1,96 @@
+{
+  "environment": {
+    "architecture": "arm64",
+    "macOS": "26.6.2",
+    "xcode": "Xcode 27.1"
+  },
+  "physicalWheelSession": {
+    "acceptedDiscreteEvents": 641,
+    "annotatedDestinationEvents": 692,
+    "bypassedContinuousEvents": 0,
+    "clockMode": "displayLink",
+    "fallbackDestinationEvents": 0,
+    "frameIntervalMaximumMs": 25.215291883796453,
+    "frameIntervalP95Ms": 8.766249753534794,
+    "frameIntervalsRecorded": 9947,
+    "inputCallbackMaximumMs": 1.184916589409113,
+    "inputCallbackP95Ms": 0.2277083694934845,
+    "maximumPointerMismatchPixels": 0.35546875,
+    "pointerMetricScope": "Distance between event position and a cursor read immediately before posting; includes cursor movement between reads.",
+    "postedFrames": 8372,
+    "routedWheelEvents": 692,
+    "scope": "One physical Razer-wheel development session; not a controlled comparison or external-app presentation measurement.",
+    "unknownDestinationEvents": 0
+  },
+  "recordedAt": "2026-11-19T00:57:30+01:00",
+  "releaseMicrobenchmark": {
+    "p95BudgetMs": 2,
+    "paths": {
+      "backgroundRendererCallback": {
+        "maximumMs": 0.013416633009910583,
+        "p50Ms": 0.0002086162567138672,
+        "p95Ms": 0.000250060111284256,
+        "samples": 5000
+      },
+      "frameEmission": {
+        "maximumMs": 0.02733338624238968,
+        "p50Ms": 0.0002915039658546448,
+        "p95Ms": 0.0003334134817123413,
+        "samples": 1250
+      },
+      "nativeCallback": {
+        "maximumMs": 0.011333264410495758,
+        "p50Ms": 0.00012526288628578186,
+        "p95Ms": 0.00016670674085617065,
+        "samples": 5000
+      },
+      "smoothCallback": {
+        "maximumMs": 0.007708091288805008,
+        "p50Ms": 0.0002086162567138672,
+        "p95Ms": 0.000250060111284256,
+        "samples": 5000
+      }
+    },
+    "scope": "Optimized local coordinator with cached identities and captured output; excludes global event posting, physical input, and external-app rendering."
+  },
+  "schemaVersion": 1,
+  "validation": {
+    "coordinatorLineCoverage": {
+      "count": 177,
+      "covered": 132,
+      "percent": 74.58
+    },
+    "functionalTestsPassed": 45,
+    "productionModuleLineCoverage": {
+      "ScrollCore": {
+        "count": 71,
+        "covered": 69,
+        "percent": 97.18
+      },
+      "ScrollEvents": {
+        "count": 303,
+        "covered": 266,
+        "percent": 87.79
+      },
+      "ScrollTiming": {
+        "count": 55,
+        "covered": 42,
+        "percent": 76.36
+      },
+      "SmoothWheel": {
+        "count": 8,
+        "covered": 0,
+        "percent": 0.0
+      },
+      "SmoothWheelAppCore": {
+        "count": 869,
+        "covered": 633,
+        "percent": 72.84
+      }
+    },
+    "scope": "Coverage is line execution, not branch completeness; permission, tap installation and external-app rendering require live validation. Unlinked sources are counted as uncovered source lines.",
+    "uiSnapshotStates": 8,
+    "uiTestsPassed": 1
+  },
+  "version": "0.3.17"
+}

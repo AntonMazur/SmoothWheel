@@ -1,0 +1,80 @@
+{
+  "controls" : [
+    {
+      "frame" : [
+        222,
+        604,
+        169,
+        29
+      ],
+      "text" : "SmoothWheel",
+      "type" : "NSTextField"
+    },
+    {
+      "frame" : [
+        27,
+        545,
+        169,
+        36
+      ],
+      "text" : "Scrolling",
+      "type" : "DesignButton",
+      "value" : "0"
+    },
+    {
+      "frame" : [
+        196,
+        545,
+        168,
+        36
+      ],
+      "text" : "App exclusions",
+      "type" : "DesignButton",
+      "value" : "0"
+    },
+    {
+      "frame" : [
+        364,
+        545,
+        169,
+        36
+      ],
+      "text" : "Playground",
+      "type" : "DesignButton",
+      "value" : "0"
+    },
+    {
+      "frame" : [
+        16,
+        474,
+        528,
+        38
+      ],
+      "text" : "Get into the flow.",
+      "type" : "NSTextField"
+    },
+    {
+      "frame" : [
+        16,
+        439,
+        528,
+        19
+      ],
+      "text" : "Enable smoothing, then use this space to find your feel.",
+      "type" : "NSTextField"
+    },
+    {
+      "frame" : [
+        16,
+        16,
+        528,
+        15
+      ],
+      "text" : "Option = original scrolling. Reverse direction to cancel the old movement.",
+      "type" : "NSTextField"
+    }
+  ],
+  "height" : 660,
+  "nativeCloseButton" : true,
+  "width" : 560
+}

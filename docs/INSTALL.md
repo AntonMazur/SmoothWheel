@@ -42,7 +42,7 @@ For a manual installation, download the latest ZIP and replace the app in Applic
 ## If smoothing does not work
 
 - Check **Enable smoothing** and the Accessibility permission. If permission is shown as enabled but input is not being processed after an update, quit the app, remove its old Accessibility entry, add the current copy from Applications, and reopen it.
-- Check **App exclusions**. Exclusions apply to the foreground app, even when the pointer is over a background window.
+- Check **App exclusions**. Exclusions apply to the event’s receiving process, including inactive windows and system overlays. Background renderers may have a separate process identity.
 - Record other active mouse or scrolling utilities in a [compatibility report](https://github.com/AntonMazur/SmoothWheel/issues/new?template=compatibility_report.yml). Continuous events, including trackpad input, pass through unchanged.
 
 See [known limitations and compatibility reports](COMPATIBILITY.md) for current observations.

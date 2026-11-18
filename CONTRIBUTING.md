@@ -21,6 +21,8 @@ The app archive is written to `releases/SmoothWheel.zip`. This is an ad-hoc-sign
 - Scrolling-engine fixes: preserve trackpad events, input distance, immediate direction reversal, and fail-open behavior.
 - Design improvements: preserve native macOS controls, keyboard operation, readable contrast, and system appearance.
 
+See [testing and measurement](docs/TESTING.md) for replay snapshots, UI baselines, coverage floors, and callback budgets. On macOS 26, `./scripts/test.sh` runs UI snapshots by default; run `./scripts/measure-engine.sh` for optimized callback measurements.
+
 Keep pull requests focused. Add meaningful tests when changing scrolling behavior. Run `./scripts/test.sh` and `./build.sh` before submitting. Avoid adding a vendor dependency or collecting input telemetry.
 
 Open issues and pull requests at https://github.com/AntonMazur/SmoothWheel. The website is maintained in a separate repository.

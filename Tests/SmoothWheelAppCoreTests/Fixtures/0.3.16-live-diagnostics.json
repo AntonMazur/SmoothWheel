@@ -1,0 +1,17 @@
+{
+  "acceptedDiscreteEvents": 209,
+  "annotatedDestinationEvents": 294,
+  "bypassedContinuousEvents": 0,
+  "clockMode": "displayLink",
+  "fallbackDestinationEvents": 0,
+  "frameIntervalMaximumMs": 108.302291482687,
+  "frameIntervalP95Ms": 8.646916598081589,
+  "frameIntervalsRecorded": 2615,
+  "inputCallbackMaximumMs": 3.991041798144579,
+  "inputCallbackP95Ms": 0.19287504255771637,
+  "maximumPointerMismatchPixels": 0,
+  "postedFrames": 2375,
+  "routedWheelEvents": 384,
+  "scope": "Sanitized aggregate historical reference, not a replay input or controlled comparison.",
+  "unknownDestinationEvents": 90
+}

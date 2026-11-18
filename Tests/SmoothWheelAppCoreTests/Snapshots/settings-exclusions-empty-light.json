@@ -1,0 +1,101 @@
+{
+  "controls" : [
+    {
+      "frame" : [
+        222,
+        564,
+        169,
+        29
+      ],
+      "text" : "SmoothWheel",
+      "type" : "NSTextField"
+    },
+    {
+      "frame" : [
+        27,
+        505,
+        169,
+        36
+      ],
+      "text" : "Scrolling",
+      "type" : "DesignButton",
+      "value" : "0"
+    },
+    {
+      "frame" : [
+        196,
+        505,
+        168,
+        36
+      ],
+      "text" : "App exclusions",
+      "type" : "DesignButton",
+      "value" : "0"
+    },
+    {
+      "frame" : [
+        364,
+        505,
+        169,
+        36
+      ],
+      "text" : "Playground",
+      "type" : "DesignButton",
+      "value" : "0"
+    },
+    {
+      "frame" : [
+        16,
+        434,
+        528,
+        38
+      ],
+      "text" : "Make exceptions.",
+      "type" : "NSTextField"
+    },
+    {
+      "frame" : [
+        16,
+        399,
+        528,
+        19
+      ],
+      "text" : "Keep games, remote desktops, or any app you prefer unchanged.",
+      "type" : "NSTextField"
+    },
+    {
+      "frame" : [
+        34,
+        346,
+        137,
+        19
+      ],
+      "text" : "No exceptions yet.",
+      "type" : "NSTextField"
+    },
+    {
+      "frame" : [
+        34,
+        316,
+        357,
+        16
+      ],
+      "text" : "Smoothing is available in every app unless you add it here.",
+      "type" : "NSTextField"
+    },
+    {
+      "frame" : [
+        18,
+        13,
+        524,
+        38
+      ],
+      "text" : "Add an application…",
+      "type" : "DesignButton",
+      "value" : "0"
+    }
+  ],
+  "height" : 620,
+  "nativeCloseButton" : true,
+  "width" : 560
+}

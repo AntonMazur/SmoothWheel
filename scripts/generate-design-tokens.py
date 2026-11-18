@@ -14,7 +14,7 @@ for category in ['space','radius','font','control']:
     for key,value in data[category].items(): swift+=f'        static let {key}: CGFloat = {value}\n'
     swift+='    }\n'
 swift+='}\n'
-files={root/'Sources/SmoothWheel/DesignTokens.swift':swift}
+files={root/'Sources/SmoothWheelAppCore/DesignTokens.swift':swift}
 for path,content in files.items():
     if '--check' in sys.argv:
         assert path.exists() and path.read_text()==content, f'Stale design tokens: {path}'

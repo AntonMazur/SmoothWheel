@@ -6,13 +6,28 @@ permissions:
   contents: read
 jobs:
   macos:
-    runs-on: macos-latest
+    runs-on: macos-26
+    env:
+      SMOOTHWHEEL_UI_SNAPSHOTS: '1'
     steps:
       - uses: actions/checkout@v4
-      - name: Test native app and design tokens
-        run: ./scripts/test.sh
+      - name: Test production engine, UI snapshots, coverage and design tokens
+        run: ./scripts/test.sh > artifacts-test.log 2>&1 || { cat artifacts-test.log; exit 1; }
+      - name: Measure optimized coordinator and frame emission
+        run: ./scripts/measure-engine.sh
       - name: Build app bundle
         run: ./build.sh
+      - name: Attach coverage summary
+        if: always()
+        run: test ! -f artifacts/coverage/summary.md || cat artifacts/coverage/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: SmoothWheel-test-evidence
+          path: |
+            artifacts/
+            artifacts-test.log
+          retention-days: 14
       - uses: actions/upload-artifact@v4
         with:
           name: SmoothWheel-local-build

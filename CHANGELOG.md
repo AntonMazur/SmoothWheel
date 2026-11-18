@@ -1,5 +1,76 @@
 # Changelog
 
+## 0.3.17 — 2026-11-19
+
+Public update from 0.3.11, including the 0.3.12–0.3.16 development fixes below.
+
+### Improved scrolling
+
+- **Immediate smoothing after switching apps.** Use macOS’s assigned event recipient and cached process identities, so a scroll in excluded ChatGPT no longer keeps the next Telegram or system-overlay scroll native while a hit-test catches up.
+- **Consistent scrolling in Notes attachments.** Track background renderers through the workspace’s running-app updates. Embedded documents now receive the same smoothing and reverse-direction settings as the notes list; the physical trial confirmed both.
+- **Keep blocking work away from input and frames.** Accessibility hit-testing runs on a coalesced worker only as a fallback. Known recipients use a cached identity lookup, without per-wheel process queries. Old lookup completions cannot override a known event recipient.
+- **Avoid mixed wheel bursts.** Unknown recipients pass through natively for their current burst; switching to a different known process starts a new routing transaction. Input distance, the existing motion curve, display pacing, and trackpad passthrough remain unchanged.
+- **Regression protection.** 45 functional tests, eight light/dark UI snapshot states, line-coverage floors, and release-mode callback budgets now run in CI. Replays cover exclusions, system overlays, overlapping apps, delayed lookups, background renderers, direction and distance.
+
+### Public measurements
+
+One physical Razer-wheel session on Apple Silicon, macOS 26.6.2, using the display-linked clock:
+
+| Measurement | Result |
+|---|---:|
+| Routed wheel events / generated output frames | 692 / 8,372 |
+| Input-callback time, p95 / maximum | 0.228 / 1.185 ms |
+| Emission-frame interval, p95 / maximum | 8.766 / 25.215 ms |
+| Unknown event destinations in this sample | 0 |
+| Motion-core / events-and-routing line coverage | 97.18% / 87.79% |
+| Frame-clock / coordinator line coverage | 76.36% / 74.58% |
+
+These timings measure SmoothWheel’s callbacks and emission cadence, **not another app’s rendering FPS or end-to-end input latency**. This is one development session, not a controlled before/after or competitor benchmark. Optimized local callback measurements also passed the 2 ms p95 regression budget; those exclude global posting and rendering. [Aggregate JSON and complete measurement scope](docs/metrics/v0.3.17.json), [methodology and limitations](docs/TESTING.md).
+
+The measurements contain no recordings, note contents, app-usage list, process IDs or local filesystem paths. The app still collects no analytics; diagnostics are opt-in and local.
+
+### Distribution
+
+Apple Silicon, macOS 13+ target; ad-hoc signed and not notarized. The oldest supported macOS and Intel remain unvalidated. Updating may require removing the old Accessibility entry and adding the current app from Applications, then enabling smoothing again. Residual landing behavior in Gmail remains a known compatibility report; this release does not claim every visual hitch is resolved.
+
+## 0.3.16 — 2026-11-19
+
+- Route using the OS-assigned receiving process at the annotated-session event tap, with process identities cached outside the input callback. Known destinations no longer wait for Accessibility hit-testing when changing applications.
+- Scope burst continuity to the receiving process so an excluded ChatGPT burst cannot keep a new Telegram or system-overlay transaction native. Late AX results cannot cancel a known recipient’s smoothed motion.
+- Cancel pending motion on pointer delivery to another receiving process. Retain asynchronous AX resolution only for events without recipient metadata; unregistered annotated processes pass through natively when exclusions are set.
+- Add production-coordinator regressions for immediate excluded-app/messenger/overlay transitions with stale or missing AX data, process-cache lifecycle checks, and diagnostic destination-source counts. Live validation confirmed immediate Telegram smoothing with ChatGPT excluded; the captured run used only known OS annotations. This does not establish that every unrelated frame hitch is resolved.
+
+## 0.3.15 — 2026-11-18
+
+- Separate asynchronous target resolution, wheel-burst routing, motion integration, and display pacing. No Accessibility IPC or window-list queries run inside the input tap or frame callback.
+- Coalesce pointer-driven lookups on a serial worker, reject stale results, and retain valid snapshots across transient failures. No app-specific behavior.
+- Keep a native burst native until its input pause, including after late resolution or replacement-allocation failure. Cancel pending motion across target boundaries.
+- Apply the same receiving-window rules to Telegram, inactive or overlapping windows, excluded apps, and system popovers.
+- Add resolver lifecycle, stale-result, transient-failure, routing, and stalled-target/display-clock regressions. Extend opt-in diagnostics with input-callback latency and background-probe timing. Physical-wheel validation is separate.
+
+- Make the production coordinator and settings UI importable by tests. Add golden routing/frame replays, eight light/dark AppKit content snapshots, diagnostic-writer integration coverage, clean-run line coverage floors, optimized callback budgets, and CI artifacts.
+
+## 0.3.14 — 2026-11-18
+
+- Resolve the Accessibility element under the wheel pointer whenever exclusions are set, so excluded background windows remain native even while another app has focus.
+- Stop using arbitrary window-server ownership to override exclusions. Unresolved Accessibility targets pass through natively; system popovers use their own process identity.
+- Bound hit-test messaging time and keep hit-testing out of the display-frame loop. Filter overlay bounds by the resolved process.
+- Add a background-window regression and optional local per-process routing counts for physical-wheel diagnosis. Live behavior still requires confirmation.
+
+## 0.3.13 — 2026-11-18
+
+- Correct the Applications-popover case shown in the recording: keep the tap active and resolve window ownership on wheel input when the foreground app is excluded.
+- Preserve native scrolling inside excluded windows while allowing smoothing in system popovers owned by another process. Unknown owners fall back to the foreground exclusion.
+- Cancel a popover's pending scroll when the pointer leaves its bounds or a key/click dismisses it. Window metadata is never queried in the display-frame loop.
+- Add regression tests for popover ownership, visibility, hit-test order, and unresolved-owner fallback. Physical-wheel verification remains required.
+
+## 0.3.12 — 2026-11-18
+
+- Disable the event tap entirely while an excluded app is foreground, allowing native wheel events to reach that app and system popovers without SmoothWheel interception.
+- Resume interception when another app activates or an exclusion is removed; cancel pending animation on exclusion changes.
+- Keep the health check from treating an intentionally bypassed tap as a failure and pausing smoothing globally.
+- Hardware confirmation of the reported ChatGPT/Applications-folder issue is still required.
+
 ## 0.3.11 — 2026-11-14
 
 - Revert the Chrome-specific gesture-phase trial after the user reported worse Gmail scrolling.

@@ -1,0 +1,238 @@
+{
+  "controls" : [
+    {
+      "frame" : [
+        222,
+        604,
+        169,
+        29
+      ],
+      "text" : "SmoothWheel",
+      "type" : "NSTextField"
+    },
+    {
+      "frame" : [
+        27,
+        545,
+        169,
+        36
+      ],
+      "text" : "Scrolling",
+      "type" : "DesignButton",
+      "value" : "0"
+    },
+    {
+      "frame" : [
+        196,
+        545,
+        168,
+        36
+      ],
+      "text" : "App exclusions",
+      "type" : "DesignButton",
+      "value" : "0"
+    },
+    {
+      "frame" : [
+        364,
+        545,
+        169,
+        36
+      ],
+      "text" : "Playground",
+      "type" : "DesignButton",
+      "value" : "0"
+    },
+    {
+      "frame" : [
+        16,
+        465,
+        528,
+        47
+      ],
+      "text" : "Find your flow.",
+      "type" : "NSTextField"
+    },
+    {
+      "frame" : [
+        34,
+        404,
+        166,
+        24
+      ],
+      "text" : "Enable smoothing",
+      "type" : "NSTextField"
+    },
+    {
+      "frame" : [
+        470,
+        401,
+        54,
+        30
+      ],
+      "text" : "Enable smooth scrolling",
+      "type" : "DesignSwitch",
+      "value" : "1"
+    },
+    {
+      "frame" : [
+        39,
+        312,
+        161,
+        34
+      ],
+      "text" : "Precise",
+      "type" : "DesignButton",
+      "value" : "0"
+    },
+    {
+      "frame" : [
+        200,
+        312,
+        160,
+        34
+      ],
+      "text" : "Balanced",
+      "type" : "DesignButton",
+      "value" : "0"
+    },
+    {
+      "frame" : [
+        360,
+        312,
+        161,
+        34
+      ],
+      "text" : "Relaxed",
+      "type" : "DesignButton",
+      "value" : "0"
+    },
+    {
+      "frame" : [
+        34,
+        267,
+        126,
+        19
+      ],
+      "text" : "Scroll speed",
+      "type" : "NSTextField"
+    },
+    {
+      "frame" : [
+        168,
+        262,
+        298,
+        28
+      ],
+      "text" : "Scroll speed",
+      "type" : "NSSlider",
+      "value" : "1.000"
+    },
+    {
+      "frame" : [
+        474,
+        267,
+        52,
+        19
+      ],
+      "text" : "1.0×",
+      "type" : "NSTextField"
+    },
+    {
+      "frame" : [
+        34,
+        220,
+        126,
+        19
+      ],
+      "text" : "Smoothing",
+      "type" : "NSTextField"
+    },
+    {
+      "frame" : [
+        168,
+        215,
+        298,
+        28
+      ],
+      "text" : "Smoothing amount",
+      "type" : "NSSlider",
+      "value" : "0.450"
+    },
+    {
+      "frame" : [
+        474,
+        220,
+        52,
+        19
+      ],
+      "text" : "45%",
+      "type" : "NSTextField"
+    },
+    {
+      "frame" : [
+        34,
+        152,
+        134,
+        19
+      ],
+      "text" : "Reverse direction",
+      "type" : "NSTextField"
+    },
+    {
+      "frame" : [
+        470,
+        146,
+        54,
+        30
+      ],
+      "text" : "Reverse mouse scroll direction",
+      "type" : "DesignSwitch",
+      "value" : "0"
+    },
+    {
+      "frame" : [
+        86,
+        78,
+        146,
+        17
+      ],
+      "text" : "Accessibility is ready",
+      "type" : "NSTextField"
+    },
+    {
+      "frame" : [
+        86,
+        60,
+        205,
+        15
+      ],
+      "text" : "SmoothWheel can control scrolling.",
+      "type" : "NSTextField"
+    },
+    {
+      "frame" : [
+        406,
+        58,
+        124,
+        38
+      ],
+      "text" : "Open Settings",
+      "type" : "DesignButton",
+      "value" : "0"
+    },
+    {
+      "frame" : [
+        16,
+        12,
+        528,
+        14
+      ],
+      "text" : "Hold Option to bypass smoothing.",
+      "type" : "NSTextField"
+    }
+  ],
+  "height" : 660,
+  "nativeCloseButton" : true,
+  "width" : 560
+}
