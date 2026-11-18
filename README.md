@@ -65,6 +65,16 @@ Choose a preset, fine-tune the feel, and keep the original behavior in apps you 
 
 ## Get started
 
+**Using Homebrew?** Install from the [developer-maintained tap](https://github.com/AntonMazur/homebrew-tap):
+
+```sh
+brew install --cask antonmazur/tap/smoothwheel
+```
+
+Then open SmoothWheel from Applications and follow steps 2–3 below. The current build requires Apple Silicon. See the [installation guide](docs/INSTALL.md) for first launch, updates, removal, and existing manual installations.
+
+**Prefer a direct download?**
+
 1. [Download SmoothWheel.zip](https://github.com/AntonMazur/SmoothWheel/releases/latest/download/SmoothWheel.zip), extract it, and move **SmoothWheel.app** to **Applications**.
 2. Open the app and grant access in **System Settings → Privacy & Security → Accessibility**.
 3. Turn on **Enable smoothing** and start with **Balanced**. Adjust speed and smoothing to your preference, or try the built-in **Playground**.
