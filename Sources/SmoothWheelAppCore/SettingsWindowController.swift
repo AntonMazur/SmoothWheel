@@ -23,10 +23,15 @@ final class SettingsWindowController: NSWindowController {
 
     private let permissionGranted: () -> Bool
     private let resourceURL: (String) -> URL?
+    private let allowsDecorativeBackground: () -> Bool
     init(coordinator: AppDelegate, permissionGranted: @escaping () -> Bool = { AXIsProcessTrusted() },
-         resourceURL: @escaping (String) -> URL? = { Bundle.main.url(forResource: $0, withExtension: "png") }) {
+         resourceURL: @escaping (String) -> URL? = { Bundle.main.url(forResource: $0, withExtension: "png") },
+         allowsDecorativeBackground: @escaping () -> Bool = {
+             !NSWorkspace.shared.accessibilityDisplayShouldReduceTransparency && !NSWorkspace.shared.accessibilityDisplayShouldIncreaseContrast
+         }) {
         self.permissionGranted = permissionGranted
         self.resourceURL = resourceURL
+        self.allowsDecorativeBackground = allowsDecorativeBackground
         self.coordinator = coordinator
         let window = NSWindow(contentRect: NSRect(x: 0, y: 0, width: 560, height: 660),
             styleMask: [.titled, .closable, .miniaturizable], backing: .buffered, defer: false)
@@ -213,7 +218,7 @@ final class SettingsWindowController: NSWindowController {
         let selectedPreset = ScrollPreset.matching(speed: coordinator.engine.speed, smoothing: coordinator.engine.smoothing)
         presets.selectedIndex = selectedPreset.flatMap { ScrollPreset.allCases.firstIndex(of: $0) } ?? -1
         let dark = window?.effectiveAppearance.bestMatch(from: [.darkAqua, .aqua]) == .darkAqua
-        aura.isHidden = dark || NSWorkspace.shared.accessibilityDisplayShouldReduceTransparency || NSWorkspace.shared.accessibilityDisplayShouldIncreaseContrast
+        aura.isHidden = dark || !allowsDecorativeBackground()
     }
     func synchronizeControls() {
         speed.doubleValue = coordinator.engine.speed; smooth.doubleValue = coordinator.engine.smoothing

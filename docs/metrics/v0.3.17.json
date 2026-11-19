@@ -22,7 +22,7 @@
     "scope": "One physical Razer-wheel development session; not a controlled comparison or external-app presentation measurement.",
     "unknownDestinationEvents": 0
   },
-  "recordedAt": "2026-11-19T00:57:30+01:00",
+  "recordedAt": "2026-11-19T01:05:17+01:00",
   "releaseMicrobenchmark": {
     "p95BudgetMs": 2,
     "paths": {
@@ -83,9 +83,9 @@
         "percent": 0.0
       },
       "SmoothWheelAppCore": {
-        "count": 869,
+        "count": 873,
         "covered": 633,
-        "percent": 72.84
+        "percent": 72.51
       }
     },
     "scope": "Coverage is line execution, not branch completeness; permission, tap installation and external-app rendering require live validation. Unlinked sources are counted as uncovered source lines.",

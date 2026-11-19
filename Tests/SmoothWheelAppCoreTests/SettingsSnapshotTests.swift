@@ -20,6 +20,7 @@ private struct SettingsSnapshot: Codable {
 struct SettingsSnapshotTests {
     @Test @MainActor func actualSettingsWindowSnapshots() async throws {
         _ = NSApplication.shared
+        print("Snapshot host: reduceTransparency=\(NSWorkspace.shared.accessibilityDisplayShouldReduceTransparency), increaseContrast=\(NSWorkspace.shared.accessibilityDisplayShouldIncreaseContrast); fixture decorative background enabled")
         try #require(ProcessInfo.processInfo.operatingSystemVersion.majorVersion == 26,
                 "UI goldens target macOS 26; other OS versions need separately reviewed baselines")
         let scenarios: [(String, Int, Bool, Bool, Bool)] = [
@@ -42,7 +43,7 @@ struct SettingsSnapshotTests {
             let coordinator = AppDelegate(engine: engine, defaults: defaults)
             let controller = SettingsWindowController(coordinator: coordinator, permissionGranted: { active }, resourceURL: {
                 repositoryRoot.appendingPathComponent("Resources/\($0).png")
-            })
+            }, allowsDecorativeBackground: { true })
             let window = try #require(controller.window)
             defer { window.close(); engine.stop() }
             let appearance = try #require(NSAppearance(named: dark ? .darkAqua : .aqua))

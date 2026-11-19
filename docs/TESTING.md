@@ -24,7 +24,7 @@ Diagnostics tests exercise the asynchronous writer, coalesced flush requests, co
 
 ## Snapshot review
 
-Eight real AppKit content states cover paused and active scrolling, both appearances, empty and populated exclusions, and the playground. Each has a PNG and a JSON snapshot of visible control labels, values and bounds. The JSON also checks that the window supports the native close control; PNGs cover content, not the OS titlebar. Blank or uniform captures fail before comparison. Raster comparison permits up to 1% changed pixels above a 12/255 channel delta and at most 1/255 mean channel error. Layout/text JSON comparisons are exact.
+Eight real AppKit content states cover paused and active scrolling, both appearances, empty and populated exclusions, and the playground. Each has a PNG and a JSON snapshot of visible control labels, values and bounds. The JSON also checks that the window supports the native close control; PNGs cover content, not the OS titlebar. The decorative background is explicitly enabled by the snapshot fixture, so a runner’s Reduce Transparency setting cannot silently change its appearance. Production still reads the user’s Reduce Transparency and Increase Contrast preferences. Blank or uniform captures fail before comparison. Raster comparison permits up to 1% changed pixels above a 12/255 channel delta and at most 1/255 mean channel error. Layout/text JSON comparisons are exact.
 
 A mismatch saves actual, expected, red difference images, and comparison statistics in `artifacts/tests/`. Inspect those and the JSON before changing a baseline. Baseline recording is explicit and forbidden when `CI` is set:
 
