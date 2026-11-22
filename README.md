@@ -46,9 +46,9 @@ Choose a preset, save your own scrolling settings, and keep the original behavio
     <th align="center">Choose where it works</th>
   </tr>
   <tr>
-    <td align="center"><img src="docs/screenshots/scrolling-settings.jpg" alt="SmoothWheel scrolling settings with a preset picker, speed and smoothing controls, and reverse direction" width="280" /></td>
-    <td align="center"><img src="docs/screenshots/saved-presets.png" alt="Presets picker with built-in options and the saved presets Reading and Work" width="280" /></td>
-    <td align="center"><img src="docs/screenshots/app-exclusions.jpg" alt="SmoothWheel app exclusions screen for choosing applications that keep their original scrolling" width="280" /></td>
+    <td align="center"><img src="Tests/SmoothWheelAppCoreTests/Snapshots/settings-active-light.png" alt="SmoothWheel scrolling settings with a preset picker, speed and smoothing controls, and reverse direction" width="280" /></td>
+    <td align="center"><img src="Tests/SmoothWheelAppCoreTests/Snapshots/presets-selected-light.png" alt="Presets picker with built-in options and the saved presets Reading and Work" width="280" /></td>
+    <td align="center"><img src="Tests/SmoothWheelAppCoreTests/Snapshots/settings-exclusions-populated-light.png" alt="SmoothWheel app exclusions screen for choosing applications that keep their original scrolling" width="280" /></td>
   </tr>
   <tr>
     <td align="center">Adjust speed, smoothing, and direction.</td>
@@ -56,6 +56,8 @@ Choose a preset, save your own scrolling settings, and keep the original behavio
     <td align="center">Per-app exclusions.<br />Your preferences, your workflow.</td>
   </tr>
 </table>
+
+[See all screens in light and dark appearance](docs/screenshots/README.md).
 
 ## Why SmoothWheel?
 
@@ -106,7 +108,7 @@ Open **Preset → Save** to name your current speed, smoothing, and direction. S
 
 Presets stay on your Mac. Names are 1–40 characters and unique, with room for 50 saved presets. Exclusions and the Enable smoothing switch are separate settings.
 
-[See the Save dialog](docs/screenshots/save-preset.png) · [See Manage presets](docs/screenshots/manage-presets.png)
+[See the preset screens](docs/screenshots/README.md).
 
 ## Build and test
 
