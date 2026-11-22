@@ -6,7 +6,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 # Floors are reviewed with the report, not silently lowered when a test fails.
-FLOORS = {"ScrollCore": 90, "ScrollEvents": 85, "ScrollTiming": 75, "ScrollEngine.swift": 60}
+FLOORS = {"ScrollCore": 90, "ScrollEvents": 85, "ScrollTiming": 75, "ScrollEngine.swift": 60,
+          "SavedScrollPreset.swift": 90, "SavedPresetStore.swift": 90}
 
 
 def report(source, output):

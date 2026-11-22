@@ -1,0 +1,38 @@
+{
+  "controls" : [
+    {
+      "frame" : [
+        18,
+        598,
+        44,
+        44
+      ],
+      "text" : "Back to Presets",
+      "type" : "PresetFocusButton",
+      "value" : "0"
+    },
+    {
+      "frame" : [
+        26,
+        542,
+        508,
+        52
+      ],
+      "text" : "Manage presets",
+      "type" : "NSTextField"
+    },
+    {
+      "frame" : [
+        38,
+        486,
+        484,
+        20
+      ],
+      "text" : "No saved presets",
+      "type" : "NSTextField"
+    }
+  ],
+  "height" : 660,
+  "nativeCloseButton" : true,
+  "width" : 560
+}

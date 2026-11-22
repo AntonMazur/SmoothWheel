@@ -17,6 +17,10 @@ func assertJSONSnapshot<T: Encodable>(_ value: T, name: String) throws {
         }
         try data.write(to: expected)
     }
+    guard FileManager.default.fileExists(atPath: expected.path) else {
+        Issue.record("Missing layout baseline: \(name). Review the recorded actual layout.")
+        return
+    }
     let baseline = try Data(contentsOf: expected)
     #expect(data == baseline, "Snapshot changed: \(name). Inspect artifacts/tests before explicitly recording a new baseline.")
 }

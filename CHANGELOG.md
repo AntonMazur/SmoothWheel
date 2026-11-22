@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.4.0 — 2026-11-22
+
+- Save named scrolling presets containing speed, smoothing, and reverse direction. Choose built-in or saved presets from a names-only library with consistent spacing and a clear selection mark.
+- Rename or delete saved presets in a dedicated manager. Choosing a record to manage leaves the current settings intact. Manual adjustments mark a preset as modified, and Save current settings creates a new preset.
+- Keep presets locally across launches, with validation and recovery for unreadable preferences. Existing settings, exclusions, built-in values, and launch-disabled behavior are preserved.
+- Refine Settings transitions. The Save form appears immediately, new and deleted rows fade in place, and the active preset checkmark stays visible during Rename. Reduce Motion resolves transitions immediately.
+- Add 24 saved-preset snapshots, bringing the total to 32, and check 194 AppKit animation frames at 120 Hz in light and dark mode. The checks found 0 pt of saved or deleted row drift and zero missing checkmark frames during Rename.
+
+Applying a saved preset took **0.475 ms p95** across 1,000 applications with 50 saved presets on Apple Silicon. This measures the release build with isolated preferences. [Aggregate measurements and methodology](docs/metrics/v0.4.0.json).
+
+Apple Silicon download, targeting macOS 13 or later. See the [installation guide](docs/INSTALL.md) for Accessibility setup and first launch of the ad-hoc-signed build.
+
 ## 0.3.17 — 2026-11-19
 
 Public update from 0.3.11, including the 0.3.12–0.3.16 development fixes below.

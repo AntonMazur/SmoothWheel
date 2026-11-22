@@ -82,4 +82,8 @@ enum DesignTokens {
         static let switchHeight: CGFloat = 30
         static let sliderHeight: CGFloat = 28
     }
+    enum Motion {
+        static let fast: TimeInterval = 120 / 1000
+        static let normal: TimeInterval = 180 / 1000
+    }
 }

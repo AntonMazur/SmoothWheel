@@ -76,35 +76,23 @@
     },
     {
       "frame" : [
-        39,
-        312,
-        161,
-        34
+        34,
+        320,
+        53,
+        19
       ],
-      "text" : "Precise",
-      "type" : "DesignButton",
-      "value" : "0"
+      "text" : "Preset",
+      "type" : "NSTextField"
     },
     {
       "frame" : [
-        200,
-        312,
-        160,
-        34
+        433,
+        309,
+        91,
+        40
       ],
       "text" : "Balanced",
-      "type" : "DesignButton",
-      "value" : "0"
-    },
-    {
-      "frame" : [
-        360,
-        312,
-        161,
-        34
-      ],
-      "text" : "Relaxed",
-      "type" : "DesignButton",
+      "type" : "PresetFocusButton",
       "value" : "0"
     },
     {

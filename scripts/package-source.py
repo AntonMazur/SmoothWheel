@@ -4,7 +4,7 @@ import zipfile
 root = Path(__file__).resolve().parents[1]
 releases = root / 'releases'
 releases.mkdir(exist_ok=True)
-entries = ['Package.swift', 'README.md', 'LICENSE', 'CHANGELOG.md', 'CONTRIBUTING.md',
+entries = ['Package.swift', 'README.md', 'LICENSE', 'CHANGELOG.md', 'CONTRIBUTING.md', 'AGENTS.md',
            'build.sh', 'ScrollTest.html', 'Resources', 'design', 'THIRD_PARTY_NOTICES.md',
            'Sources', 'Tests', 'scripts', 'docs', '.github', '.gitignore']
 with zipfile.ZipFile(releases / 'SmoothWheel-source.zip', 'w', zipfile.ZIP_DEFLATED) as archive:

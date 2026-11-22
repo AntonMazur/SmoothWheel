@@ -37,19 +37,22 @@
 
 ## Make scrolling feel right
 
-Choose a preset, fine-tune the feel, and keep the original behavior in apps you exclude.
+Choose a preset, save your own scrolling settings, and keep the original behavior in apps you exclude.
 
 <table>
   <tr>
     <th align="center">Find your feel</th>
+    <th align="center">Switch saved presets</th>
     <th align="center">Choose where it works</th>
   </tr>
   <tr>
-    <td align="center"><img src="docs/screenshots/scrolling-settings.jpg" alt="SmoothWheel scrolling settings with three presets, speed and smoothing controls, and reverse direction" width="320" /></td>
-    <td align="center"><img src="docs/screenshots/app-exclusions.jpg" alt="SmoothWheel app exclusions screen for choosing applications that keep their original scrolling" width="320" /></td>
+    <td align="center"><img src="docs/screenshots/scrolling-settings.jpg" alt="SmoothWheel scrolling settings with a preset picker, speed and smoothing controls, and reverse direction" width="280" /></td>
+    <td align="center"><img src="docs/screenshots/saved-presets.png" alt="Presets picker with built-in options and the saved presets Reading and Work" width="280" /></td>
+    <td align="center"><img src="docs/screenshots/app-exclusions.jpg" alt="SmoothWheel app exclusions screen for choosing applications that keep their original scrolling" width="280" /></td>
   </tr>
   <tr>
-    <td align="center">Precise, Balanced, or Relaxed.<br />Separate speed and smoothing controls.</td>
+    <td align="center">Adjust speed, smoothing, and direction.</td>
+    <td align="center">Save and switch between named settings.</td>
     <td align="center">Per-app exclusions.<br />Your preferences, your workflow.</td>
   </tr>
 </table>
@@ -57,7 +60,7 @@ Choose a preset, fine-tune the feel, and keep the original behavior in apps you 
 ## Why SmoothWheel?
 
 - **Smoother wheel scrolling.** Smooth discrete vertical and horizontal input from standard third-party mouse wheels.
-- **Your preferred feel.** Three presets, separate speed and smoothing controls, and independent wheel direction.
+- **Your preferred feel.** Start with one of three built-in presets, or save your own speed, smoothing, and wheel direction under a name.
 - **Trackpad-friendly.** Continuous trackpad events pass through unchanged.
 - **Control when you need it.** Per-app exclusions, Option to bypass, and Control/Command scrolling-shortcut passthrough.
 - **Try it as you tune it.** A built-in scroll playground lets you test your settings.
@@ -95,7 +98,15 @@ Using a Logitech, Razer, Microsoft, or another standard mouse? A five-minute tes
 
 ## Compatibility and known limitations
 
-Version **0.3.17** is an Apple Silicon build, ad-hoc signed and not notarized. Physical Razer testing and native event/frame-clock regressions have been performed; broad application compatibility and the oldest supported macOS still need validation. Slight landing movement remains reported in Gmail. The reverted Chrome-specific trial is documented in the [changelog](CHANGELOG.md).
+Version **0.4.0** is an Apple Silicon build, ad-hoc signed and not notarized. Physical Razer testing and native event/frame-clock regressions have been performed; broad application compatibility and the oldest supported macOS still need validation. Slight landing movement remains reported in Gmail. The reverted Chrome-specific trial is documented in the [changelog](CHANGELOG.md).
+
+## Saved presets
+
+Open **Preset → Save** to name your current speed, smoothing, and direction. Select a saved name to restore it. Open **Manage presets**, choose a saved name, then use **Rename** or **Delete**. After adjusting a saved preset, the picker shows **Modified**. Use **Save** to keep those adjustments as a new preset. Reset Scrolling Settings keeps your saved library.
+
+Presets stay on your Mac. Names are 1–40 characters and unique, with room for 50 saved presets. Exclusions and the Enable smoothing switch are separate settings.
+
+[See the Save dialog](docs/screenshots/save-preset.png) · [See Manage presets](docs/screenshots/manage-presets.png)
 
 ## Build and test
 

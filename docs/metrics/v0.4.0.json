@@ -1,0 +1,97 @@
+{
+  "environment": {
+    "architecture": "arm64",
+    "macOS": "26.6.2",
+    "xcode": "Xcode 27.1"
+  },
+  "presetApplication": {
+    "budgetP95Ms": 10,
+    "maximumMs": 0.6799167022109032,
+    "p50Ms": 0.3969999961555004,
+    "p95Ms": 0.4747500643134117,
+    "samples": 1000,
+    "scope": "Optimized preset application using isolated preferences. Excludes UI rendering.",
+    "storedRecords": 50,
+    "warmups": 100
+  },
+  "recordedAt": "2026-11-22T15:03:58+01:00",
+  "releaseMicrobenchmark": {
+    "p95BudgetMs": 2,
+    "paths": {
+      "backgroundRendererCallback": {
+        "maximumMs": 0.010542105883359909,
+        "p50Ms": 0.000250060111284256,
+        "p95Ms": 0.0002919696271419525,
+        "samples": 5000
+      },
+      "frameEmission": {
+        "maximumMs": 0.0026668421924114227,
+        "p50Ms": 0.0003334134817123413,
+        "p95Ms": 0.00037532299757003784,
+        "samples": 1250
+      },
+      "nativeCallback": {
+        "maximumMs": 0.001125037670135498,
+        "p50Ms": 0.00012526288628578186,
+        "p95Ms": 0.00016670674085617065,
+        "samples": 5000
+      },
+      "smoothCallback": {
+        "maximumMs": 0.017541460692882538,
+        "p50Ms": 0.000250060111284256,
+        "p95Ms": 0.0002919696271419525,
+        "samples": 5000
+      }
+    },
+    "scope": "Optimized local coordinator with cached identities and captured output; excludes global event posting, physical input, and external-app rendering."
+  },
+  "schemaVersion": 1,
+  "settingsTransitions": {
+    "appearances": 2,
+    "framesSampled": 194,
+    "maxDeletedRowDriftPt": 0,
+    "maxSavedRowDriftPt": 0,
+    "missingRenameCheckmarkFrames": 0,
+    "sampleRateHz": 120,
+    "scope": "Offscreen native AppKit presentation samples. Excludes physical display pacing."
+  },
+  "validation": {
+    "coordinatorLineCoverage": {
+      "count": 177,
+      "covered": 132,
+      "percent": 74.58
+    },
+    "functionalTestsPassed": 52,
+    "productionModuleLineCoverage": {
+      "ScrollCore": {
+        "count": 71,
+        "covered": 69,
+        "percent": 97.18
+      },
+      "ScrollEvents": {
+        "count": 303,
+        "covered": 266,
+        "percent": 87.79
+      },
+      "ScrollTiming": {
+        "count": 55,
+        "covered": 42,
+        "percent": 76.36
+      },
+      "SmoothWheel": {
+        "count": 8,
+        "covered": 0,
+        "percent": 0.0
+      },
+      "SmoothWheelAppCore": {
+        "count": 2681,
+        "covered": 2375,
+        "percent": 88.59
+      }
+    },
+    "scope": "Coverage is line execution, not branch completeness; permission, tap installation and external-app rendering require live validation. Unlinked sources are counted as uncovered source lines.",
+    "uiSnapshotStates": 32,
+    "uiTestsPassed": 2
+  },
+  "version": "0.4.0"
+}

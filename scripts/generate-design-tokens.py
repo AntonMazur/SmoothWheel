@@ -9,9 +9,13 @@ swift+='    private static func hex(_ value: String) -> NSColor {\n        let n
 for key,light in data['color']['light'].items():
     dark=data['color']['dark'][key]
     swift+=f'    static let {key} = NSColor(name: nil) {{ appearance in\n        hex(appearance.bestMatch(from: [.darkAqua, .aqua]) == .darkAqua ? "{dark}" : "{light}")\n    }}\n'
-for category in ['space','radius','font','control']:
+for category in ['space','radius','font','control','motion']:
     swift+=f'    enum {category.title()} {{\n'
-    for key,value in data[category].items(): swift+=f'        static let {key}: CGFloat = {value}\n'
+    for key,value in data[category].items():
+        if category == 'motion':
+            swift+=f'        static let {key}: TimeInterval = {value} / 1000\n'
+        else:
+            swift+=f'        static let {key}: CGFloat = {value}\n'
     swift+='    }\n'
 swift+='}\n'
 files={root/'Sources/SmoothWheelAppCore/DesignTokens.swift':swift}

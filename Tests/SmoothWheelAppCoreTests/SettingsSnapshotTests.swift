@@ -43,7 +43,7 @@ struct SettingsSnapshotTests {
             let coordinator = AppDelegate(engine: engine, defaults: defaults)
             let controller = SettingsWindowController(coordinator: coordinator, permissionGranted: { active }, resourceURL: {
                 repositoryRoot.appendingPathComponent("Resources/\($0).png")
-            }, allowsDecorativeBackground: { true })
+            }, allowsDecorativeBackground: { true }, reduceMotion: { true })
             let window = try #require(controller.window)
             defer { window.close(); engine.stop() }
             let appearance = try #require(NSAppearance(named: dark ? .darkAqua : .aqua))
@@ -73,8 +73,280 @@ struct SettingsSnapshotTests {
             try assertJSONSnapshot(SettingsSnapshot(width: Int(root.bounds.width), height: Int(root.bounds.height),
                 nativeCloseButton: window.styleMask.contains(.closable), controls: controls), name: "settings-\(name)")
             try assertImageSnapshot(view: root, appearance: appearance, name: "settings-\(name)")
+            if page == 0 && active {
+                let tabs = try #require(root.accessibilityChildren()?.first as? PresetControl)
+                let choices = try #require(tabs.accessibilityChildren() as? [DesignButton])
+                let tab = try #require(choices.first { $0.title == "App exclusions" })
+                let colors = try verifyPointerFill(tab, in: appearance, resting: .clear)
+                #expect(tabs.selectedIndex == 0 && choices.filter(\.selected).count == 1)
+                tabs.selectedIndex = 1
+                #expect(tabs.selectedIndex == 1 && choices.filter(\.selected) == [tab])
+                #expect(tab.accessibilityValue() as? Int == 1)
+                try verifyButtonFill(tab, in: appearance, equals: DesignTokens.surfaceRaised)
+                try presetEvidence("tab-hover-\(dark ? "dark" : "light")", colors)
+            }
+        }
+        try savedPresetWindowSnapshots()
+    }
+}
+
+@MainActor private func savedPresetWindowSnapshots() throws {
+    var captured = 0
+    for dark in [false, true] {
+        for state in ["delete", "empty", "selected", "keyboard-focus", "modified", "save", "save-result", "invalid", "rename", "manager", "manager-hover", "manager-empty"] {
+            print("Capturing preset snapshot \(state) (\(dark ? "dark" : "light"))")
+            try autoreleasepool {
+                let (suite, defaults) = try presetDefaults()
+                defer { defaults.removePersistentDomain(forName: suite) }
+                let engine = ScrollEngine(targets: ReplayTarget(), uptime: { 1 }, postEvent: { _ in })
+                defer { engine.stop() }
+                engine.enabled = true; engine.speed = 1.4; engine.smoothing = 0.65
+                let coordinator = AppDelegate(engine: engine, defaults: defaults)
+                var selected: UUID?
+                if !["empty", "manager-empty"].contains(state) {
+                    selected = try coordinator.savePreset(name: "Reading").id
+                    let work = try coordinator.presetStore.save(name: "Work", configuration: ScrollConfiguration(speed: 1.8, smoothing: 0.55, reversed: false))
+                    if ["manager", "manager-hover", "rename", "delete"].contains(state) {
+                        try coordinator.applySavedPreset(work.id)
+                    } else {
+                        try coordinator.presetStore.select(selected)
+                    }
+                }
+                if state == "modified" { engine.speed = 1.6 }
+                let controller = SettingsWindowController(coordinator: coordinator, permissionGranted: { true }, resourceURL: {
+                    repositoryRoot.appendingPathComponent("Resources/\($0).png")
+                }, allowsDecorativeBackground: { true }, reduceMotion: { true })
+                coordinator.settings = controller
+                let window = try #require(controller.window)
+                let appearance = try #require(NSAppearance(named: dark ? .darkAqua : .aqua))
+                window.appearance = appearance
+                window.setFrameOrigin(NSPoint(x: -10000, y: -10000)); window.orderBack(nil)
+                defer { window.close() }
+                controller.synchronizeControls()
+                switch state {
+                case "save-result":
+                    controller.showPresetLibrary()
+                    let library = try #require(controller.presetPresentation as? PresetLibraryController)
+                    try #require(library.contentView.subviews.compactMap { $0 as? NSButton }.first { $0.title == "Save" })
+                        .performClick(nil)
+                    let editor = try #require(controller.presetPresentation as? PresetNameController)
+                    editor.nameField.stringValue = "Evening"
+                    editor.validateName()
+                    editor.submitButton.performClick(nil)
+                    let updated = try #require(controller.presetPresentation as? PresetLibraryController)
+                    #expect(updated.rows.filter(\.checked).map(\.title) == ["Evening"])
+                case "save", "invalid":
+                    controller.showPresetName()
+                    let editor = try #require(controller.presetPresentation as? PresetNameController)
+                    editor.nameField.stringValue = state == "save" ? "Evening" : "Reading"; editor.validateName()
+                    let card = try #require(editor.view as? PresetCard)
+                    #expect(card.contentView.frame == card.bounds)
+                    #expect(editor.view.bounds.width == 320)
+                    #expect(editor.nameField.frame.height == 44)
+                    #expect(editor.submitButton.isEnabled == (state == "save"))
+                    #expect(editor.message.isHidden == (state == "save"))
+                    #expect(state == "save" ? editor.view.bounds.height == 218 : editor.view.bounds.height > 218)
+                    window.makeFirstResponder(nil)
+                case "manager", "manager-empty":
+                    controller.showPresetManager(selecting: selected)
+                case "manager-hover":
+                    controller.showPresetManager(selecting: selected)
+                    let hover = try #require(NSEvent.enterExitEvent(with: .mouseEntered, location: .zero, modifierFlags: [],
+                        timestamp: 0, windowNumber: window.windowNumber, context: nil, eventNumber: 0,
+                        trackingNumber: 0, userData: nil))
+                    let rename = try #require(controller.presetManager?.rename)
+                    rename.mouseEntered(with: hover)
+                    #expect(rename.showsPointerHover)
+                case "rename":
+                    controller.showPresetManager(selecting: selected)
+                    controller.presetManager?.rename.performClick(nil)
+                    #expect(controller.presetManager?.rows.allSatisfy { !$0.isEnabled } == true)
+                    window.makeFirstResponder(nil)
+                case "keyboard-focus":
+                    controller.showPresetLibrary()
+                    let library = try #require(controller.presetPresentation as? PresetLibraryController)
+                    let down = try #require(NSEvent.keyEvent(with: .keyDown, location: .zero, modifierFlags: [], timestamp: 0,
+                        windowNumber: window.windowNumber, context: nil, characters: "", charactersIgnoringModifiers: "", isARepeat: false, keyCode: 125))
+                    window.sendEvent(down)
+                    #expect(library.rows.last?.showsKeyboardFocus == true)
+                    #expect(library.rows.last?.checked == false)
+                case "delete":
+                    controller.showPresetManager(selecting: selected)
+                    controller.presetManager?.delete.performClick(nil)
+                    let confirmation = try #require(controller.presetPresentation as? PresetDeleteController)
+                    #expect(confirmation.question == "Delete “Reading”?")
+                    let panel = try #require(confirmation.view as? DesignAlertPanel)
+                    #expect(panel.bounds.size == NSSize(width: 320, height: 176))
+                    let title = panel.title
+                    let buttons = confirmation.cancel.frame.union(confirmation.delete.frame)
+                    #expect(title.alignment == .center)
+                    #expect(title.frame.midX == confirmation.view.bounds.midX)
+                    #expect(buttons.midX == confirmation.view.bounds.midX)
+                    #expect(panel.symbolTile.frame.midX == title.frame.midX)
+                    #expect(confirmation.cancel.frame.size == NSSize(width: 132, height: 44))
+                    #expect(confirmation.delete.frame.size == confirmation.cancel.frame.size)
+                    #expect(confirmation.delete.destructive)
+                    #expect(controller.presetManager?.rows.allSatisfy { !$0.isEnabled } == true)
+                default: controller.showPresetLibrary()
+                }
+                let name = "presets-\(state)-\(dark ? "dark" : "light")"
+                if let library = controller.presetPresentation as? PresetLibraryController {
+                    let heights = library.rows.map { $0.frame.height }
+                    #expect(Set(heights) == [PresetRowButton.rowHeight])
+                    let leading = library.rows.map { library.view.convert($0.nameFrame, from: $0).minX }
+                    #expect(Set(leading).count == 1)
+                    #expect(library.rows.allSatisfy { !$0.title.contains("×") && !$0.title.contains("%") })
+                    if state != "keyboard-focus" { window.makeFirstResponder(nil) }
+                    if state == "selected" {
+                        let close = try #require(library.contentView.subviews.compactMap { $0 as? PresetFocusButton }
+                            .first { $0.accessibilityLabel() == "Close presets" })
+                        try verifyCircularIconRendering(close, in: appearance)
+                        let save = try #require(library.contentView.subviews.compactMap { $0 as? DesignButton }
+                            .first { $0.title == "Save" })
+                        let colors = try verifyPointerFill(save, in: appearance, resting: DesignTokens.surfaceRaised)
+                        try presetEvidence("preset-save-hover-\(dark ? "dark" : "light")", colors)
+                    }
+                }
+                try capturePresetWindow(window, appearance: appearance, name: name)
+                controller.dismissPresetPresentation(); captured += 1
+            }
         }
     }
+    #expect(captured == 24)
+    try presetEvidence("preset-manager-snapshots", ["presetSnapshotStates": captured, "appearances": 2, "uniformRowHeightPt": PresetRowButton.rowHeight,
+                               "nameLeadingEdges": 1, "parameterLabelsInChooser": 0, "windowWidthPt": 560, "windowHeightPt": 660])
+    try presetEvidence("preset-navigation-rendering", ["appearances": 2, "renderedStatesPerAppearance": 5,
+        "checkedStates": ["rest", "hover", "press", "disabled", "increased contrast"]])
+}
+
+@MainActor private func verifyPointerFill(_ button: DesignButton, in appearance: NSAppearance,
+                                         resting: NSColor) throws -> [String: [Int]] {
+    func event(_ type: NSEvent.EventType) throws -> NSEvent {
+        try #require(NSEvent.enterExitEvent(with: type, location: .zero, modifierFlags: [],
+            timestamp: 0, windowNumber: button.window?.windowNumber ?? 0, context: nil,
+            eventNumber: 0, trackingNumber: 0, userData: nil))
+    }
+
+    let rest = try verifyButtonFill(button, in: appearance, equals: resting)
+    button.mouseEntered(with: try event(.mouseEntered))
+    #expect(button.showsPointerHover)
+    let hover = try verifyButtonFill(button, in: appearance, equals: DesignTokens.track)
+    button.mouseExited(with: try event(.mouseExited))
+    #expect(!button.showsPointerHover)
+    let exit = try verifyButtonFill(button, in: appearance, equals: resting)
+    return ["restRGBA": rest, "hoverRGBA": hover, "exitRGBA": exit]
+}
+
+@MainActor @discardableResult
+private func verifyButtonFill(_ button: DesignButton, in appearance: NSAppearance,
+                              equals color: NSColor) throws -> [Int] {
+    let width = Int(button.bounds.width), height = Int(button.bounds.height)
+    let bitmap = try #require(NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: width, pixelsHigh: height,
+        bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true, isPlanar: false, colorSpaceName: .deviceRGB,
+        bitmapFormat: [], bytesPerRow: width * 4, bitsPerPixel: 32))
+    let context = try #require(NSGraphicsContext(bitmapImageRep: bitmap))
+    var expected: [Int] = []
+    appearance.performAsCurrentDrawingAppearance {
+        let resolved = color.usingColorSpace(.deviceRGB) ?? color
+        expected = [resolved.redComponent, resolved.greenComponent, resolved.blueComponent, resolved.alphaComponent]
+            .map { Int(($0 * 255).rounded()) }
+        let previousContext = NSGraphicsContext.current
+        NSGraphicsContext.current = context
+        NSColor.clear.setFill()
+        button.bounds.fill(using: .copy)
+        button.draw(button.bounds)
+        NSGraphicsContext.current = previousContext
+    }
+    let pixels = try #require(bitmap.bitmapData)
+    let offset = (height / 2) * bitmap.bytesPerRow + 12 * 4
+    let actual = (0..<4).map { Int(pixels[offset + $0]) }
+    #expect(zip(actual, expected).allSatisfy { abs($0 - $1) <= 1 },
+            "\(button.title) fill RGBA was \(actual), expected \(expected)")
+    return actual
+}
+
+@MainActor private func verifyCircularIconRendering(_ button: PresetFocusButton, in appearance: NSAppearance) throws {
+    let width = Int(button.bounds.width), height = Int(button.bounds.height)
+    let disc = try #require(button.circularIconBounds)
+    func verify(fill: NSColor, ink: NSColor, increasedContrast: Bool = false) throws {
+        let bitmap = try #require(NSBitmapImageRep(bitmapDataPlanes: nil, pixelsWide: width, pixelsHigh: height,
+            bitsPerSample: 8, samplesPerPixel: 4, hasAlpha: true, isPlanar: false, colorSpaceName: .deviceRGB,
+            bitmapFormat: [], bytesPerRow: width * 4, bitsPerPixel: 32))
+        let context = try #require(NSGraphicsContext(bitmapImageRep: bitmap))
+        func rgb(_ color: NSColor) -> [Int] {
+            let resolved = color.usingColorSpace(.deviceRGB) ?? color
+            return [resolved.redComponent, resolved.greenComponent, resolved.blueComponent].map { Int(($0 * 255).rounded()) }
+        }
+        var expectedFill = [Int](), expectedInk = [Int](), expectedBoundary = [Int]()
+        appearance.performAsCurrentDrawingAppearance {
+            expectedFill = rgb(fill)
+            expectedInk = rgb(ink)
+            expectedBoundary = rgb(DesignTokens.textMuted)
+            if increasedContrast {
+                let previousContext = NSGraphicsContext.current
+                NSGraphicsContext.current = context
+                button.drawCircularIcon(in: disc, increasedContrast: true)
+                NSGraphicsContext.current = previousContext
+            } else {
+                button.displayIgnoringOpacity(button.bounds, in: context)
+            }
+        }
+        let pixels = try #require(bitmap.bitmapData)
+        func matches(_ expected: [Int], x: Int, y: Int, tolerance: Int = 1) -> Bool {
+            let offset = y * bitmap.bytesPerRow + x * 4
+            return expected.indices.allSatisfy { abs(Int(pixels[offset + $0]) - expected[$0]) <= tolerance }
+        }
+        #expect(matches(expectedFill, x: Int(disc.minX) + 5, y: height / 2))
+        #expect((15..<29).contains { y in (15..<29).contains { x in matches(expectedInk, x: x, y: y, tolerance: 12) } })
+        if increasedContrast { #expect(matches(expectedBoundary, x: Int(disc.minX), y: height / 2, tolerance: 12)) }
+    }
+    let hover = try #require(NSEvent.enterExitEvent(with: .mouseEntered, location: .zero, modifierFlags: [],
+        timestamp: 0, windowNumber: button.window?.windowNumber ?? 0, context: nil, eventNumber: 0,
+        trackingNumber: 0, userData: nil))
+    try verify(fill: DesignTokens.line, ink: DesignTokens.text)
+    button.mouseEntered(with: hover)
+    try verify(fill: DesignTokens.track, ink: DesignTokens.text)
+    button.highlight(true)
+    try verify(fill: DesignTokens.track, ink: DesignTokens.textMuted)
+    button.highlight(false)
+    button.isEnabled = false
+    #expect(!button.showsPointerHover)
+    try verify(fill: DesignTokens.line, ink: DesignTokens.textMuted)
+    button.isEnabled = true
+    try verify(fill: DesignTokens.line, ink: DesignTokens.text, increasedContrast: true)
+}
+
+@MainActor private func capturePresetWindow(_ window: NSWindow, appearance: NSAppearance, name: String) throws {
+    let root = try #require(window.contentView)
+    root.layoutSubtreeIfNeeded(); window.displayIfNeeded()
+    var controls: [VisibleControl] = []
+    func visit(_ view: NSView) {
+        guard !view.isHidden else { return }
+        if view.superview is PresetRowButton { return }
+        var text: String?, value: String?
+        if let field = view as? NSTextField { text = field.stringValue }
+        else if let button = view as? NSButton {
+            text = button.title.isEmpty ? button.accessibilityLabel() : button.title
+            value = String(button.state.rawValue)
+            if let row = button as? PresetRowButton {
+                value = row.checked ? "selected" : "unselected"
+                if row.showsKeyboardFocus { value = (value ?? "") + ", keyboard focus" }
+                if row.accessibilityLabel()?.hasSuffix(", in use") == true { value = (value ?? "") + ", in use" }
+            }
+        }
+        if let text, !text.isEmpty {
+            let rect = root.convert(view.bounds, from: view)
+            #expect(rect.minX >= -1 && rect.maxX <= root.bounds.width + 1)
+            #expect(rect.minY >= -1 && rect.maxY <= root.bounds.height + 1)
+            controls.append(VisibleControl(type: String(describing: type(of: view)), text: text,
+                                          frame: [rect.minX, rect.minY, rect.width, rect.height].map { Int($0.rounded()) }, value: value))
+        }
+        for child in view.subviews { visit(child) }
+    }
+    visit(root)
+    try assertJSONSnapshot(SettingsSnapshot(width: Int(root.bounds.width), height: Int(root.bounds.height),
+        nativeCloseButton: window.styleMask.contains(.closable), controls: controls), name: name)
+    try assertImageSnapshot(view: root, appearance: appearance, name: name)
 }
 
 @MainActor private func assertImageSnapshot(view: NSView, appearance: NSAppearance, name: String) throws {
@@ -87,6 +359,7 @@ struct SettingsSnapshotTests {
     appearance.performAsCurrentDrawingAppearance {
         view.displayIgnoringOpacity(view.bounds, in: context)
     }
+
     let pixels = try #require(bitmap.bitmapData)
     let visiblePixels = (0..<(width * height)).filter { pixels[$0 * 4 + 3] > 0 }.count
     try #require(visiblePixels > width * height / 2, "Refusing a blank UI snapshot")
@@ -98,6 +371,10 @@ struct SettingsSnapshotTests {
     if ProcessInfo.processInfo.environment["SMOOTHWHEEL_RECORD_SNAPSHOTS"] == "1" {
         guard ProcessInfo.processInfo.environment["CI"] == nil else { Issue.record("Cannot record UI goldens in CI"); return }
         try actualData.write(to: baselineURL)
+    }
+    guard FileManager.default.fileExists(atPath: baselineURL.path) else {
+        Issue.record("Missing image baseline: \(name). Review the recorded actual image.")
+        return
     }
     let expectedData = try Data(contentsOf: baselineURL)
     let expected = try #require(NSBitmapImageRep(data: expectedData))

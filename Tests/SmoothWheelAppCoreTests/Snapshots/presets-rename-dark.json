@@ -1,0 +1,134 @@
+{
+  "controls" : [
+    {
+      "frame" : [
+        18,
+        598,
+        44,
+        44
+      ],
+      "text" : "Back to Presets",
+      "type" : "PresetFocusButton",
+      "value" : "0"
+    },
+    {
+      "frame" : [
+        26,
+        542,
+        508,
+        52
+      ],
+      "text" : "Manage presets",
+      "type" : "NSTextField"
+    },
+    {
+      "frame" : [
+        28,
+        488,
+        504,
+        28
+      ],
+      "text" : "Reading",
+      "type" : "PresetRowButton",
+      "value" : "selected"
+    },
+    {
+      "frame" : [
+        28,
+        460,
+        504,
+        28
+      ],
+      "text" : "Work",
+      "type" : "PresetRowButton",
+      "value" : "unselected, in use"
+    },
+    {
+      "frame" : [
+        38,
+        392,
+        484,
+        26
+      ],
+      "text" : "Reading",
+      "type" : "NSTextField"
+    },
+    {
+      "frame" : [
+        28,
+        352,
+        504,
+        36
+      ],
+      "text" : "Rename",
+      "type" : "PresetFocusButton",
+      "value" : "1"
+    },
+    {
+      "frame" : [
+        28,
+        314,
+        504,
+        36
+      ],
+      "text" : "Delete",
+      "type" : "PresetFocusButton",
+      "value" : "0"
+    },
+    {
+      "frame" : [
+        184,
+        355,
+        232,
+        24
+      ],
+      "text" : "Rename preset",
+      "type" : "NSTextField"
+    },
+    {
+      "frame" : [
+        144,
+        321,
+        272,
+        14
+      ],
+      "text" : "Preset name",
+      "type" : "NSTextField"
+    },
+    {
+      "frame" : [
+        144,
+        273,
+        272,
+        44
+      ],
+      "text" : "Reading",
+      "type" : "DesignAlertTextField"
+    },
+    {
+      "frame" : [
+        144,
+        213,
+        132,
+        44
+      ],
+      "text" : "Cancel",
+      "type" : "PresetFocusButton",
+      "value" : "0"
+    },
+    {
+      "frame" : [
+        284,
+        213,
+        132,
+        44
+      ],
+      "text" : "Rename",
+      "type" : "PresetFocusButton",
+      "value" : "0"
+    }
+  ],
+  "height" : 660,
+  "nativeCloseButton" : true,
+  "width" : 560
+}

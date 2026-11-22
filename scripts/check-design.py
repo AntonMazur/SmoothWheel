@@ -13,7 +13,11 @@ for theme,colors in tokens['color'].items():
     assert set(colors)==set(tokens['color']['light'])
     for text,background,minimum in [('text','paper',4.5),('textMuted','paper',4.5),('text','surface',4.5),
                                     ('textMuted','surface',4.5),('accentText','paper',4.5),
-                                    ('accentDisplay','paper',3),('onPrimary','primary',4.5),('onPrimary','primaryHover',4.5)]:
+                                    ('accentDisplay','paper',3),('onPrimary','primary',4.5),('onPrimary','primaryHover',4.5),
+                                    ('accentText','accentWash',4.5),('accentText','surfaceRaised',4.5),
+                                    ('text','track',4.5),('textMuted','surfaceRaised',4.5),
+                                    ('text','line',3),('textMuted','line',3),('textMuted','track',3),
+                                    ('focus','line',3),('focus','track',3)]:
         low,high=sorted([luminance(colors[text]),luminance(colors[background])])
         contrast=(high+.05)/(low+.05)
         assert contrast>=minimum, f'{theme}: {text}/{background} contrast {contrast:.2f} < {minimum}'

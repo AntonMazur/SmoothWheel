@@ -23,17 +23,19 @@ def test_count(name):
     suites = root.findall('testsuite')
     if not suites or any(int(s.get('errors', '0')) or int(s.get('failures', '0')) for s in suites):
         raise SystemExit(f'No passing {name} test report')
-    return sum(int(s.get('tests', '0')) for s in suites)
+    return sum(case.find('skipped') is None for suite in suites for case in suite.findall('testcase'))
 
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--version', required=True)
-    parser.add_argument('--runtime-report', required=True, type=Path)
+    parser.add_argument('--runtime-report', type=Path, help='Optional matching physical-wheel session')
     args = parser.parse_args()
-    raw = json.loads(args.runtime_report.read_text())
     coverage = json.loads((ROOT / 'artifacts/coverage/summary.json').read_text())
     timings = json.loads((ROOT / 'artifacts/performance/callbacks.json').read_text())
+    presets = json.loads((ROOT / 'artifacts/performance/saved-presets.json').read_text())
+    frame_results = json.loads((ROOT / 'artifacts/tests/saved-presets-results.json').read_text())
+    appearances = [frame_results[f'transition-frames-{mode}'] for mode in ('light', 'dark')]
     report = {
         'schemaVersion': 1,
         'version': args.version,
@@ -42,12 +44,6 @@ def main():
             'architecture': platform.machine(), 'macOS': platform.mac_ver()[0],
             'xcode': subprocess.check_output(['xcodebuild', '-version'], text=True).strip().splitlines()[0],
         },
-        'physicalWheelSession': {
-            **{key: raw[key] for key in RUNTIME_FIELDS},
-            'routedWheelEvents': sum(raw['wheelRouting'].values()),
-            'scope': 'One physical Razer-wheel development session; not a controlled comparison or external-app presentation measurement.',
-            'pointerMetricScope': 'Distance between event position and a cursor read immediately before posting; includes cursor movement between reads.',
-        },
         'releaseMicrobenchmark': {
             'paths': timings,
             'scope': 'Optimized local coordinator with cached identities and captured output; excludes global event posting, physical input, and external-app rendering.',
@@ -55,12 +51,34 @@ def main():
         },
         'validation': {
             'functionalTestsPassed': test_count('functional'), 'uiTestsPassed': test_count('ui'),
-            'uiSnapshotStates': len(list((ROOT / 'Tests/SmoothWheelAppCoreTests/Snapshots').glob('settings-*.png'))),
+            'uiSnapshotStates': len(list((ROOT / 'Tests/SmoothWheelAppCoreTests/Snapshots').glob('*.png'))),
             'productionModuleLineCoverage': coverage['modules'],
             'coordinatorLineCoverage': coverage['files']['Sources/SmoothWheelAppCore/ScrollEngine.swift'],
             'scope': 'Coverage is line execution, not branch completeness; permission, tap installation and external-app rendering require live validation. Unlinked sources are counted as uncovered source lines.',
         },
+        'presetApplication': {
+            **{key: presets[key] for key in ('samples', 'warmups', 'storedRecords', 'p50Ms', 'p95Ms', 'maximumMs', 'budgetP95Ms')},
+            'scope': 'Optimized preset application using isolated preferences. Excludes UI rendering.',
+        },
+        'settingsTransitions': {
+            'appearances': len(appearances),
+            'framesSampled': sum(int(case['frames']) for appearance in appearances
+                                 for case in appearance['transitions'].values()),
+            'sampleRateHz': appearances[0]['rateHz'],
+            'maxSavedRowDriftPt': max(a['transitions']['saveRow']['verticalDriftPt'] for a in appearances),
+            'maxDeletedRowDriftPt': max(a['transitions']['deleteRow']['departingDriftPt'] for a in appearances),
+            'missingRenameCheckmarkFrames': sum(int(a['transitions']['rename']['missingCheckmarkFrames']) for a in appearances),
+            'scope': 'Offscreen native AppKit presentation samples. Excludes physical display pacing.',
+        },
     }
+    if args.runtime_report:
+        raw = json.loads(args.runtime_report.read_text())
+        report['physicalWheelSession'] = {
+            **{key: raw[key] for key in RUNTIME_FIELDS},
+            'routedWheelEvents': sum(raw['wheelRouting'].values()),
+            'scope': 'One physical Razer-wheel session. External-app presentation is outside this measurement.',
+            'pointerMetricScope': 'Distance between event position and a cursor read immediately before posting; includes cursor movement between reads.',
+        }
     destination = ROOT / 'docs/metrics' / f'v{args.version}.json'
     destination.parent.mkdir(parents=True, exist_ok=True)
     destination.write_text(json.dumps(report, indent=2, sort_keys=True) + '\n')
